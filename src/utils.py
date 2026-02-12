@@ -1,42 +1,49 @@
-import pandas as pd
 import calendar
 from datetime import datetime
+import pandas as pd
 
 
 def get_last_day_of_month(year, month):
-    """Повертає дату останнього дня місяця."""
     day = calendar.monthrange(int(year), int(month))[1]
     return datetime(int(year), int(month), day)
 
 
+def get_usd_rate(rates_df, date, currency):
+    currency = str(currency).upper()
+    if currency == 'USD': return 1.0
+    try:
+        search_date = date.date() if hasattr(date, 'date') else pd.to_datetime(date).date()
+        return rates_df.loc[(search_date, currency), 'Exchange Rate Amount']
+    except Exception:
+        return None
+
+
 def apply_vat_logic(df, settings):
-    """Виправлена логіка ПДВ з урахуванням різних форматів ставок."""
-    # 1. Типи, що підлягають оподаткуванню згідно з ТЗ
-    vat_eligible_types = ['sale', 'sales', 'refund', 'chargeback', 'chb']
+    """Професійний розрахунок VAT з валідацією типів."""
+    # Тільки ці типи мають ПДВ зобов'язання за ТЗ
+    vat_eligible = ['sales', 'sale', 'refund', 'chb', 'chargeback']
+    c_col = 'buyer_country' if 'buyer_country' in df.columns else 'country'
 
-    # 2. Мапінг країни
-    geo = settings.get('geo')
-    c_col = 'country' if 'country' in df.columns else 'buyer_country'
-    if geo is not None:
-        geo_dict = geo.set_index('Alpha-2 code')['English short name'].to_dict()
-        df['COUNTRY NAME'] = df[c_col].map(geo_dict)
+    # Мепінг країни
+    geo_df = settings.get('geo')
+    geo_map = geo_df.set_index('Alpha-2 code')['English short name'].to_dict()
+    df['COUNTRY NAME'] = df[c_col].map(geo_map).fillna("Unknown")
 
-    # 3. Обробка ставок ПДВ (0.21 -> 21.0)
-    vat_sheet = settings.get('vat_rates')
-    if vat_sheet is not None:
-        # Видаляємо символ % якщо він є, і перетворюємо на число
-        vat_sheet['Rate_Num'] = vat_sheet['Standard Rate'].astype(str).str.replace('%', '').astype(float)
-        vat_dict = vat_sheet.set_index('Code')['Rate_Num'].to_dict()
-        df['VAT RATE'] = df[c_col].map(vat_dict).fillna(0)
+    # Мепінг ставок (обробка 0.21 -> 21.0)
+    vat_sheet = settings.get('vat_rates').copy()
+    vat_sheet['rate_val'] = pd.to_numeric(vat_sheet['Standard Rate'], errors='coerce')
+    vat_sheet.loc[vat_sheet['rate_val'] < 1, 'rate_val'] *= 100
+    vat_map = vat_sheet.set_index('Code')['rate_val'].to_dict()
 
-    # Виправляємо масштаб ставки (якщо прийшло 0.21 замість 21)
-    mask_small = (df['VAT RATE'] > 0) & (df['VAT RATE'] < 1)
-    df.loc[mask_small, 'VAT RATE'] = df.loc[mask_small, 'VAT RATE'] * 100
+    df['VAT RATE'] = df[c_col].map(vat_map).fillna(0)
 
-    # 4. Розрахунок ПДВ
-    df['type_low'] = df['mapped_type'].astype(str).str.lower()
+    # Розрахунок VAT Currency
+    df['type_low'] = df['TYPE'].astype(str).str.lower()
     df['VAT Currency'] = 0.0
-    mask_eligible = df['type_low'].isin(vat_eligible_types)
-    df.loc[mask_eligible, 'VAT Currency'] = df['AMOUNT'] * (df['VAT RATE'] / 100)
+
+    # Рахуємо ПДВ ТІЛЬКИ для eligible типів
+    mask = df['type_low'].isin(vat_eligible) & (df['VAT RATE'] > 0)
+    # ПДВ бере знак від суми (Amount)
+    df.loc[mask, 'VAT Currency'] = (df['AMOUNT'] * (df['VAT RATE'] / 100)).round(4)
 
     return df

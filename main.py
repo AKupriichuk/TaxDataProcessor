@@ -6,97 +6,94 @@ from src.processors import paypal_processor, stripe_processor
 
 
 def main():
-    input_str = input("Введіть шлях до кварталу (напр. data/2025/Q4): ").strip()
+    print("\n" + "=" * 50 + "\nTAX DATA PROCESSOR v1.5 (FINAL STABLE)\n" + "=" * 50)
+    input_str = input("[?] Шлях до кварталу: ").strip()
     q_path = Path(input_str).resolve()
-    data_root = q_path.parents[1]
 
-    # Очистка папки результатів
+    if not q_path.exists(): return
+
+    data_root = q_path.parents[1]
     results_base = data_root / "results"
+
+    # 1. Повне очищення результатів перед запуском
     if results_base.exists():
         shutil.rmtree(results_base)
     results_base.mkdir(parents=True, exist_ok=True)
 
-    # Завантаження бази
+    # 2. Завантаження ресурсів
     settings = loaders.load_settings(data_root / "settings.xlsx")
     rates_df = loaders.load_exchange_rates(data_root / "_rates")
 
-    # Підготовка словника курсів для швидкодії (Senior advice)
-    rates_dict = rates_df.set_index(['Starting Date', 'Currency Code'])['Exchange Rate Amount'].to_dict()
+    all_data = []
 
-    all_dfs = []
+    # 3. Обробка файлів
+    files = [f for f in q_path.rglob("*.csv") if "_output" not in f.name]
 
-    for file_path in q_path.rglob("*.csv"):
-        if "results" in str(file_path) or "_output" in str(file_path):
-            continue
-
+    for file_path in files:
         parts = [p.lower() for p in file_path.parts]
+        source = 'paypal' if 'paypal' in parts else 'stripe'
 
-        if 'paypal' in parts:
-            source = 'paypal'
-            le_short = file_path.parent.name
-            month = file_path.parent.parent.name
-            year = q_path.parent.name
-            df = paypal_processor.process_paypal(file_path, le_short, month, year, settings)
-
-            # Мепінг FULL NAME для PayPal
-            le_map = settings['le'].set_index('SHORT')['FULL NAME'].to_dict()
-            df['LE'] = df['le_ref'].map(le_map)
-            file_id = f"paypal_{month}_{le_short}_{file_path.stem}"
-
-        elif 'stripe' in parts:
-            source = 'stripe'
-            df = stripe_processor.process_stripe(file_path, settings)
-            month = str(df['MONTH'].iloc[0])
-            year = str(df['YEAR'].iloc[0])
-            file_id = f"stripe_{month}_{file_path.stem}"
+        if source == 'paypal':
+            le_folder, month_folder = file_path.parent.name, file_path.parent.parent.name
+            df = paypal_processor.process_paypal(file_path, le_folder, month_folder, q_path.parent.name, settings)
+            file_id = f"paypal_{le_folder.replace(' ', '_')}"
         else:
-            continue
+            df = stripe_processor.process_stripe(file_path)
+            le_val = str(df['LE_REF'].iloc[0]).replace(' ', '_')
+            file_id = f"stripe_{le_val}_{file_path.stem}"
 
-        # Розрахунки ПДВ
+        # Корекція знаків: Refund/CHB завжди мінус, решта завжди плюс
+        df['type_tmp'] = df['TYPE'].astype(str).str.lower()
+        df['AMOUNT'] = df.apply(
+            lambda x: -abs(x['amount']) if any(t in x['type_tmp'] for t in ['refund', 'chb', 'chargeback']) else abs(
+                x['amount']), axis=1)
+
+        df['YEAR'], df['MONTH'] = df['DATE'].dt.year, df['DATE'].dt.month
+
+        # Складений мепінг LE
+        le_sheet = settings.get('le')
+        le_map = {**le_sheet.set_index('SHORT')['FULL NAME'].to_dict(),
+                  **le_sheet.set_index('LE')['FULL NAME'].to_dict()}
+        df['LE'] = df['LE_REF'].map(le_map).fillna("NOT_MAPPED_LE_" + df['LE_REF'])
+
+        # Мепінг Проекту
+        proj_map = settings.get('project mapping').set_index('SUBPROJECT_TECH')['SUBPROJECT_MA'].to_dict()
+        df['PROJECT NAME'] = df['PROJ_CODE'].map(proj_map).fillna("NOT_MAPPED_PROJ_" + df['PROJ_CODE'])
+
+        # VAT та USD
         df = utils.apply_vat_logic(df, settings)
+        df['rate_usd'] = df.apply(lambda x: utils.get_usd_rate(rates_df, x['DATE'], x.get('currency', 'USD')),
+                                  axis=1).fillna(1.0)
 
-        # Виправлена обробка валюти (fix AttributeError)
-        if 'currency' not in df.columns:
-            df['currency'] = 'USD'
-        df['currency'] = df['currency'].astype(str).str.upper()
+        df['AMOUNT USD'] = (df['AMOUNT'] * df['rate_usd']).round(2)
+        df['VAT USD'] = (df['VAT Currency'] * df['rate_usd']).round(2)
 
-        # Розрахунок курсів
-        df['rate'] = df.apply(
-            lambda x: rates_dict.get((x['date_proc'].date(), x['currency']), 1.0)
-            if x['currency'] != 'USD' else 1.0, axis=1
-        )
+        # Збереження окремих результатів
+        out_month = f"{df['MONTH'].iloc[0]:02d}"
+        month_dir = results_base / str(df['YEAR'].iloc[0]) / q_path.name / out_month
+        month_dir.mkdir(parents=True, exist_ok=True)
 
-        df['AMOUNT USD'] = (df['AMOUNT'] * df['rate']).round(2)
-        df['VAT USD'] = (df['VAT Currency'] * df['rate']).round(2)
+        cols = ['YEAR', 'MONTH', 'LE', 'PROJECT NAME', 'AMOUNT', 'AMOUNT USD', 'TYPE', 'COUNTRY NAME', 'VAT RATE',
+                'VAT Currency', 'VAT USD']
+        df[cols].to_csv(month_dir / f"{file_id}_output.csv", index=False)
+        all_data.append(df[cols])
+        print(f"   [OK] {source.upper()}: {file_path.name}")
 
-        # Перейменування та мепінг проектів
-        df = df.rename(columns={'mapped_type': 'TYPE', 'date_proc': 'DATE'})
-        p_map = settings['project mapping'].set_index('SUBPROJECT_TECH')['SUBPROJECT_MA'].to_dict()
-        df['PROJECT NAME'] = df['proj_code'].map(p_map)
+    # 4. ФІНАЛЬНИЙ ПІВОТ (Тільки податкові типи)
+    if all_data:
+        grand_df = pd.concat(all_data)
 
-        # Сортування колонок згідно ТЗ
-        target_cols = ['YEAR', 'MONTH', 'LE', 'PROJECT NAME', 'AMOUNT', 'AMOUNT USD',
-                       'TYPE', 'COUNTRY NAME', 'VAT RATE', 'VAT Currency', 'VAT USD']
-        final_out = df.reindex(columns=target_cols)
+        # Критично: фільтруємо тільки Sales, Refund, CHB для фінального звіту
+        tax_eligible = ['sales', 'sale', 'refund', 'chb', 'chargeback']
+        tax_only = grand_df[grand_df['TYPE'].astype(str).str.lower().isin(tax_eligible)].copy()
 
-        # Збереження
-        out_dir = results_base / str(year) / q_path.name / str(month)
-        out_dir.mkdir(parents=True, exist_ok=True)
-        final_out.to_csv(out_dir / f"{file_id}_output.csv", index=False)
-
-        all_dfs.append(final_out)
-        print(f"✅ Оброблено: {file_id}")
-
-    if all_dfs:
-        final_concat = pd.concat(all_dfs, ignore_index=True)
-        pivot = final_concat.groupby(['YEAR', 'MONTH', 'LE', 'PROJECT NAME'])[
-            ['AMOUNT USD', 'VAT USD']].sum().reset_index()
+        pivot = tax_only.groupby(['YEAR', 'MONTH', 'LE', 'PROJECT NAME'])[['AMOUNT USD', 'VAT USD']].sum().reset_index()
         pivot = pivot.round(2)
 
         pivot_path = results_base / q_path.parent.name / q_path.name / "vat_quarter.csv"
         pivot_path.parent.mkdir(parents=True, exist_ok=True)
         pivot.to_csv(pivot_path, index=False)
-        print(f"\n📊 ФІНАЛЬНИЙ ЗВІТ СФОРМОВАНО: {pivot_path}")
+        print(f"\n📊 ГОТОВО! Звіт: {pivot_path}")
 
 
 if __name__ == "__main__":

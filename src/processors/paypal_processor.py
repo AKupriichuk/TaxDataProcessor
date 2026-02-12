@@ -1,28 +1,23 @@
 import pandas as pd
-from src.utils import get_last_day_of_month
+from src import utils
 
 
 def process_paypal(file_path, le_short, month, year, settings):
     df = pd.read_csv(file_path)
-    df.columns = [c.strip() for c in df.columns]
+    df['DATE'] = utils.get_last_day_of_month(year, month)
+    df['LE_REF'] = le_short
 
-    df['date_proc'] = get_last_day_of_month(year, month)
-    df['le_ref'] = le_short
-    df['YEAR'] = int(year)
-    df['MONTH'] = int(month)
+    # Мепінг типу (вкладка 'tr mapping pp')
+    tr_map_df = settings.get('tr mapping pp')
+    if tr_map_df is not None:
+        t_dict = tr_map_df.set_index('Paypal T-code')['Mapping'].to_dict()
+        df['TYPE'] = df['type'].map(t_dict)
 
-    # Мепінг типу
-    t_map = settings.get('tr mapping pp').set_index('Paypal T-code')['Mapping'].to_dict()
-    df['mapped_type'] = df['type'].map(t_map)
+    # Проєкт (PSP=PAYPAL + LE)
+    psp_df = settings.get('psp project')
+    if psp_df is not None:
+        proj = psp_df[(psp_df['PSP'] == 'PAYPAL') & (psp_df['LE'] == le_short)]['Project'].values
+        df['PROJ_CODE'] = proj[0] if len(proj) > 0 else "Unknown"
 
-    # Проект
-    psp_sheet = settings.get('psp project')
-    p_code = psp_sheet[psp_sheet['LE'] == le_short]['Project'].values
-    df['proj_code'] = p_code[0] if len(p_code) > 0 else "Unknown"
-
-    # Знак суми
-    df['type_low'] = df['mapped_type'].astype(str).str.lower()
-    df['AMOUNT'] = df.apply(lambda x: -abs(x['amount']) if x['type_low'] in ['refund', 'chargeback'] else x['amount'],
-                            axis=1)
-
+    df['currency'] = df.get('currency', 'USD')
     return df
