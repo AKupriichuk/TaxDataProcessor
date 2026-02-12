@@ -1,0 +1,124 @@
+amount,project,uuid,provider,currency,Legal entity,operation_type,date,buyer_country
+277.62,projectA,38f9f3b2-1c59-43f9-b91d-50e3300ea718,FS Acquiring,USD,ninja corp,VAT,11/1/2025,KP
+678.43,projectB,fff87cc1-ecaf-4c1a-8edc-2a92a1516e47,Nuvei,EUR,ninja corp,SALE,11/1/2025,UM
+797.3,projectC,90a62529-5cbe-4cbf-8e78-6e2ca17e6da6,FS Acquiring,USD,metasa-m,SALE,11/2/2025,KG
+675.84,projectA,597f3bc3-0b2d-4350-b5b6-ae23fb6350bf,stripe,USD,proto-m,CHARGEBACK,11/2/2025,VN
+809.23,projectC,dca63079-5050-4682-9d7a-cb80ba21be94,FS Acquiring,USD,metasa-m,REFUND,11/1/2025,MS
+354.04,projectA,fc26b05d-8214-4334-8846-c0921a3ce062,FS Acquiring,USD,ninja corp,DISCOUNT_FEE,11/2/2025,CI
+633.77,projectC,343d55fe-f5f2-48ef-8a12-d54f3b319caf,stripe,GBP,metasa-m,CHARGEBACK,11/3/2025,TR
+904.66,projectA,5aab5294-5c9b-424e-9997-6ffe3ec7c101,Nuvei,USD,ninja corp,VAT,11/2/2025,WF
+810.14,projectB,590b3566-40f1-444f-a502-b24715f32c46,FS Acquiring,USD,proto-m,REFUND,11/2/2025,KY
+9.44,projectC,0340cd92-a8fb-4eb9-ae7a-f4baf44ed675,Nuvei,EUR,ninja corp,VAT,11/2/2025,KY
+354.84,projectA,85f055f4-3bd4-4ce1-9c2a-8eccef6880de,stripe,GBP,metasa-m,VAT,11/2/2025,EE
+757.65,projectA,b3f7fdab-0c95-4970-848c-9719c1e7ad8e,stripe,GBP,proto-m,CAPTURE_FEE,11/3/2025,SZ
+888.16,projectB,71151d43-60c6-4fe2-862a-45b20b72662b,stripe,EUR,proto-m,VAT,11/3/2025,PM
+210.78,projectB,6a753b4b-e2bd-44c8-b383-778bb65a1a16,FS Acquiring,USD,proto-m,CHARGEBACK,11/3/2025,IR
+801.61,projectB,3165d795-7eb7-4604-9e96-ee1191afdf95,FS Acquiring,EUR,metasa-m,REFUND,11/2/2025,MM
+764.61,projectA,a031b38c-9795-4dff-923f-8902b000fa70,FS Acquiring,USD,metasa-m,REFUND,11/1/2025,IR
+356.44,projectB,2eb491c3-7abf-4f90-8c25-b5c517b1695c,Nuvei,USD,ninja corp,REFUND,11/1/2025,IL
+459.62,projectC,e085627d-d946-452e-89b3-8c22f9c0e46b,stripe,EUR,proto-m,REFUND,11/2/2025,NO
+716.46,projectB,24caea45-acfc-4238-85ba-f410d720d409,Nuvei,GBP,metasa-m,SALE,11/3/2025,SD
+176.57,projectB,303e0f32-fe21-4271-b88c-216565748147,FS Acquiring,EUR,proto-m,DISCOUNT_FEE,11/2/2025,PT
+313.42,projectC,db582a9b-9107-483e-8731-7c6411b37f12,stripe,GBP,proto-m,DISCOUNT_FEE,11/1/2025,BZ
+961.03,projectB,f52b54fd-581a-4aa1-aede-2d92c69afa80,FS Acquiring,EUR,metasa-m,SALE,11/2/2025,HU
+751.5,projectA,8350ee92-e0a5-4b65-b4f5-85268a6ded7e,Nuvei,USD,ninja corp,REFUND,11/3/2025,SY
+734.77,projectC,c5f5effa-5aee-49eb-b135-267250f7582a,stripe,EUR,proto-m,REFUND,11/3/2025,GY
+214.81,projectB,5f1c773d-33b4-4464-b2b8-239c72a980fc,FS Acquiring,USD,ninja corp,CHARGEBACK,11/1/2025,GF
+118.14,projectB,a7084eb8-dc9e-439c-acbf-1c8fe03d0222,Nuvei,USD,metasa-m,VAT,11/2/2025,TV
+755,projectA,359c242a-45a1-4272-a9ca-7b83ad27f280,FS Acquiring,GBP,metasa-m,CAPTURE_FEE,11/2/2025,HU
+677.43,projectC,ca7c61e8-3518-4f6d-ba0e-b170f2a00809,Nuvei,GBP,proto-m,DISCOUNT_FEE,11/1/2025,AI
+730.17,projectA,c34ec5fa-9e3d-43a1-a141-a65d56d909b7,stripe,GBP,metasa-m,REFUND,11/2/2025,ML
+672.15,projectB,8bdc03f0-2a78-4888-9221-0c8667eb6da3,FS Acquiring,EUR,proto-m,VAT,11/3/2025,MS
+580.9,projectC,43f3ee1d-c3a2-4f0e-89ad-c9882844f06f,FS Acquiring,GBP,metasa-m,DISCOUNT_FEE,11/1/2025,BY
+523.55,projectC,37cb73e0-43f5-47cc-9a5f-f9d27826cf78,FS Acquiring,EUR,proto-m,SALE,11/2/2025,UY
+896.22,projectA,ceae857d-e12d-439d-b184-46dbfb1fc554,stripe,USD,proto-m,CHARGEBACK,11/3/2025,GH
+322.69,projectB,3ef1beab-74a1-4a0a-8343-3f71fe63cdf8,Nuvei,EUR,metasa-m,REFUND,11/2/2025,MX
+593.23,projectC,7b7cc8e1-5860-458e-b2e3-10811089cdb1,Nuvei,GBP,proto-m,VAT,11/2/2025,AI
+454.52,projectA,cb5631c2-9cc7-428b-89c4-39799988a3fd,Nuvei,EUR,proto-m,CAPTURE_FEE,11/1/2025,SK
+880.93,projectB,1bb1d2a0-4b02-4968-9178-3d2e722cb671,FS Acquiring,USD,ninja corp,SALE,11/2/2025,NF
+596.59,projectC,c2312745-e589-4607-a704-dfc2ec26b345,Nuvei,USD,metasa-m,CHARGEBACK,11/1/2025,LA
+117.19,projectA,b643d350-cc0d-4ac6-9b09-9db89fa2680f,stripe,GBP,ninja corp,VAT,11/1/2025,MG
+135.62,projectC,5ccfa5fd-12ae-4f21-90ae-2f03b043b515,Nuvei,EUR,metasa-m,REFUND,11/3/2025,TD
+654.37,projectC,dc4f2dab-08f7-4b88-b55e-686e2f2c9850,stripe,GBP,metasa-m,VAT,11/3/2025,BJ
+120.12,projectC,dafef16d-fc35-42ac-88c5-bdd2e221993a,stripe,GBP,ninja corp,CHARGEBACK,11/1/2025,AL
+937.93,projectC,b407b405-2636-45ac-8a38-7423d45ee39b,FS Acquiring,EUR,ninja corp,VAT,11/3/2025,ER
+766.1,projectB,3e49d4eb-0ec9-4401-9146-382a2fc02e1b,Nuvei,GBP,ninja corp,CAPTURE_FEE,11/3/2025,CW
+837.36,projectB,d83c2b21-09b1-499b-bbd1-0d7f788f1800,stripe,USD,proto-m,CAPTURE_FEE,11/3/2025,IQ
+314.7,projectC,eae48067-fd2b-42e8-af1c-1fa684fcb1e6,Nuvei,USD,ninja corp,DISCOUNT_FEE,11/1/2025,CF
+343.94,projectC,48d7e337-a8ab-49fb-a8a9-09587f36c652,FS Acquiring,USD,proto-m,DISCOUNT_FEE,11/3/2025,GD
+305.12,projectB,0bb28a89-288e-481c-bfc9-935a71dc808b,Nuvei,GBP,ninja corp,REFUND,11/2/2025,GG
+576.44,projectB,a1ac0b17-83fb-4038-8f15-c8083fb2f3eb,Nuvei,GBP,proto-m,REFUND,11/1/2025,AX
+472.95,projectA,b3e2215a-5556-4927-af11-b26886f1f2ef,Nuvei,GBP,proto-m,VAT,11/1/2025,AE
+31.41,projectA,84f3d90a-6366-4ea2-b0c6-f7fa85b18ba9,FS Acquiring,GBP,ninja corp,REFUND,11/3/2025,GL
+138.98,projectB,60c719bf-cfe7-447b-8574-bcd8e1092836,Nuvei,GBP,ninja corp,VAT,11/2/2025,TR
+916.99,projectB,0efda3f5-890c-4a8b-a063-1b168652a00c,FS Acquiring,USD,ninja corp,SALE,11/2/2025,AO
+703.69,projectA,cbebd376-9b94-4c0d-8c75-7db909274473,Nuvei,EUR,metasa-m,REFUND,11/2/2025,CX
+534.25,projectA,025f9093-bd13-4f11-9219-85ddb7e13548,FS Acquiring,USD,metasa-m,VAT,11/2/2025,FI
+756.32,projectA,829305f3-2943-4de4-a182-2d5894d37622,stripe,USD,ninja corp,CAPTURE_FEE,11/3/2025,CY
+852.38,projectB,b3931e92-c09e-45ac-8256-1fc24f99db60,FS Acquiring,EUR,metasa-m,CHARGEBACK,11/1/2025,SK
+882.7,projectA,ad0ca4be-9ffd-4528-950d-34716a8e8562,FS Acquiring,USD,ninja corp,SALE,11/3/2025,YE
+81.04,projectA,f555b9dc-078f-4ac5-b288-fa1015082812,FS Acquiring,USD,metasa-m,REFUND,11/1/2025,ML
+515.58,projectC,3226f45d-3058-475e-a5bd-bf30143cc171,FS Acquiring,EUR,ninja corp,SALE,11/2/2025,NR
+325.33,projectA,ab71d99e-536f-4fe6-9258-d5dd584fd98f,FS Acquiring,USD,proto-m,SALE,11/2/2025,CN
+137.64,projectA,787c7ff2-9924-4e01-9525-d1e50075c92b,stripe,EUR,metasa-m,DISCOUNT_FEE,11/1/2025,GB
+25.22,projectB,8c1d9cb3-4b45-48c2-ad8c-ea89ae233e58,stripe,EUR,ninja corp,CHARGEBACK,11/2/2025,CA
+137.31,projectB,bb46ff83-9620-4362-9d07-01f9be8849c4,Nuvei,GBP,proto-m,VAT,11/2/2025,HK
+243.09,projectC,a3bdbbbb-9116-4421-af8d-bfc2bbc6bd37,Nuvei,GBP,ninja corp,VAT,11/2/2025,KI
+888.12,projectB,c50e38b6-63af-473e-8abc-77fab6f3d906,stripe,USD,ninja corp,CAPTURE_FEE,11/1/2025,SJ
+813.82,projectB,76758cd5-202d-494c-b112-20b21e27a547,stripe,EUR,proto-m,CAPTURE_FEE,11/1/2025,BQ
+913.84,projectB,2f5bfb56-b4f4-4fb5-b5ed-c3aa4836a4ef,stripe,EUR,metasa-m,VAT,11/2/2025,CD
+181.64,projectB,ac148a7a-4330-4bdf-80f8-3e9ed24f311e,stripe,EUR,ninja corp,CAPTURE_FEE,11/2/2025,HN
+17.99,projectC,7190c676-a9fc-461d-9ace-a3964773954c,stripe,EUR,proto-m,DISCOUNT_FEE,11/1/2025,GB
+174.07,projectC,fb183223-6b41-4fc4-b2fe-43a062102543,Nuvei,USD,ninja corp,CHARGEBACK,11/3/2025,BJ
+355.74,projectC,5bc4564f-9575-4100-b5e1-c5ce4e2a7e3d,stripe,GBP,proto-m,SALE,11/3/2025,LY
+728.9,projectC,0635413d-84b5-46b4-8fd7-bbf36588cc33,Nuvei,GBP,proto-m,REFUND,11/3/2025,GF
+313.67,projectB,c9cdccd5-3cf5-431b-9388-6f05ef4e4ad6,stripe,EUR,ninja corp,SALE,11/1/2025,LC
+99.11,projectB,5c279f75-a112-4a7e-b85a-45440f89db07,FS Acquiring,GBP,ninja corp,CAPTURE_FEE,11/2/2025,ZA
+841.79,projectB,8a10cb15-b191-43c5-b2ad-0b3f58b0dce6,Nuvei,GBP,metasa-m,REFUND,11/3/2025,BG
+671.17,projectB,49a474aa-e98c-4181-a9c0-506d961a8e87,FS Acquiring,GBP,metasa-m,CHARGEBACK,11/1/2025,EG
+705.47,projectC,0b981ec8-deaa-45bc-b98f-141addbca42b,stripe,USD,ninja corp,CAPTURE_FEE,11/1/2025,ZW
+496.58,projectA,d85c6837-f1ac-4091-9253-892d70c16499,Nuvei,GBP,metasa-m,SALE,11/3/2025,SE
+824.32,projectA,bdccc5df-f6d6-498b-b515-ae4bc290197c,FS Acquiring,EUR,metasa-m,CAPTURE_FEE,11/2/2025,SS
+159.01,projectA,0a893aa5-c266-44a5-9ebe-9a35aed96446,FS Acquiring,USD,proto-m,CHARGEBACK,11/2/2025,TM
+873.7,projectB,b4b661b4-8a3e-4b6f-92f5-7e780f3c4162,stripe,EUR,ninja corp,DISCOUNT_FEE,11/3/2025,TT
+813.9,projectC,5681cc13-0857-4738-ab8d-33a37b1753d5,FS Acquiring,GBP,ninja corp,DISCOUNT_FEE,11/2/2025,DE
+388.42,projectB,192d4eee-3cba-4f38-a9fc-91fb972cf6f4,stripe,GBP,ninja corp,SALE,11/1/2025,VN
+332.87,projectA,c38dc6cd-59e1-4928-91fd-32bb0f51c94e,Nuvei,EUR,proto-m,REFUND,11/1/2025,AI
+329.25,projectC,0db90ec6-0b61-4ab5-85cd-9e88b16006ac,stripe,EUR,metasa-m,SALE,11/1/2025,TO
+63.86,projectA,73a89875-adbd-4aac-80e4-e8c9d48b2666,FS Acquiring,USD,proto-m,DISCOUNT_FEE,11/2/2025,UY
+115.2,projectB,959fbc18-df22-41f9-9028-acab57c93bdb,Nuvei,EUR,proto-m,DISCOUNT_FEE,11/2/2025,BN
+176.27,projectB,dea63618-2756-4ca2-87ae-30ede8b6aabd,FS Acquiring,GBP,proto-m,CAPTURE_FEE,11/3/2025,MP
+350.24,projectB,c8a4af65-9aa9-412f-958c-7a7d4df9e8cf,stripe,GBP,metasa-m,CHARGEBACK,11/2/2025,EG
+159.43,projectA,2078d20d-07da-4108-ac84-3ca68cb2885d,FS Acquiring,EUR,ninja corp,REFUND,11/1/2025,BV
+732,projectB,d8f27cd3-60fd-4c37-a10e-cd83aa300d60,Nuvei,GBP,proto-m,CHARGEBACK,11/2/2025,CL
+827.06,projectA,251e0103-f621-4c12-ae8b-e432998cb54f,stripe,GBP,proto-m,CHARGEBACK,11/2/2025,SV
+739.94,projectB,d8638981-a70f-4534-b5fc-9ae1dacbaa9a,stripe,USD,proto-m,CHARGEBACK,11/1/2025,GL
+734.86,projectA,43dddef2-dbe1-4f76-bdea-934619dc4bbe,Nuvei,USD,ninja corp,REFUND,11/1/2025,IO
+886.63,projectA,5cdb7d05-8386-4b2c-a0fe-beae8a19e909,Nuvei,GBP,ninja corp,CHARGEBACK,11/2/2025,TG
+892.07,projectC,ab064e9f-d34b-4357-83d7-6609ac8605e9,FS Acquiring,EUR,metasa-m,DISCOUNT_FEE,11/2/2025,BG
+467.15,projectA,a06dda6b-c093-4620-b16c-0ead9603ba87,FS Acquiring,USD,metasa-m,CAPTURE_FEE,11/3/2025,DK
+417.34,projectA,d9a66f43-de19-46d6-93ef-b3e89f9e7af2,stripe,GBP,metasa-m,CHARGEBACK,11/2/2025,MA
+983.42,projectB,dd1a520a-dd91-413a-a675-10a4903964d8,Nuvei,GBP,proto-m,CHARGEBACK,11/2/2025,KG
+307.24,projectC,05f41aaf-5517-40b9-b49f-e9d56bfaa445,Nuvei,EUR,ninja corp,CHARGEBACK,11/2/2025,DE
+213.66,projectC,8a2df2c3-e163-4ef2-9512-943bce41a95a,stripe,USD,proto-m,SALE,11/2/2025,MQ
+584.25,projectA,2b0ed0cd-faf8-4041-ad5d-4d8797168277,FS Acquiring,USD,metasa-m,CAPTURE_FEE,11/2/2025,PT
+839.25,projectC,ea3108ce-c2d5-4bfe-bea6-c8e4daf67e9f,stripe,USD,ninja corp,DISCOUNT_FEE,11/1/2025,GQ
+330,projectB,bb199e9e-f158-4a9b-9b3b-ea66b86fef9e,FS Acquiring,GBP,proto-m,DISCOUNT_FEE,11/2/2025,TZ
+816.09,projectA,c07b4ebf-42f7-472e-8ccc-5b867e7be491,FS Acquiring,GBP,ninja corp,SALE,11/2/2025,ZA
+353.36,projectA,7e6aa917-0d7e-4cd5-96c5-cf66ae6222d4,stripe,USD,ninja corp,VAT,11/2/2025,FI
+998.36,projectC,aa308ff8-f39e-45b1-a8ee-acf037d2b856,Nuvei,USD,metasa-m,CHARGEBACK,11/2/2025,AG
+797.77,projectA,707d4bbd-d6b7-4ca5-b245-58f49a2be233,stripe,GBP,ninja corp,SALE,11/1/2025,PT
+633.36,projectA,80b03a6a-c768-43ca-81b9-4c80473fc623,Nuvei,EUR,metasa-m,DISCOUNT_FEE,11/1/2025,GU
+801.38,projectB,18e05ae0-57d0-4d93-ab6f-b93c816f2d2c,FS Acquiring,GBP,proto-m,CHARGEBACK,11/2/2025,JM
+889.68,projectC,5d11b484-1ed4-4b78-8d27-fc1f4ebff2c0,Nuvei,EUR,proto-m,REFUND,11/2/2025,GW
+886.4,projectA,bdcbd71a-4854-4a62-a791-7c836255375e,stripe,USD,ninja corp,CAPTURE_FEE,11/3/2025,SB
+173.57,projectB,3915db77-6bbe-48dd-aafa-1ab1f62bdf9e,Nuvei,USD,metasa-m,SALE,11/1/2025,BE
+958.58,projectB,8d742f98-c391-4efd-a881-db2e1d9a99fa,FS Acquiring,USD,proto-m,CHARGEBACK,11/2/2025,EH
+306.9,projectB,6b655214-0963-479b-9f8c-073cd060491b,Nuvei,USD,proto-m,VAT,11/1/2025,CX
+44.18,projectB,7ab5cb06-2041-4990-9cb3-ec6d9150fe09,FS Acquiring,GBP,metasa-m,REFUND,11/3/2025,LT
+876.86,projectC,8e113b54-ad21-4646-8040-82556317840f,stripe,USD,proto-m,CAPTURE_FEE,11/2/2025,CK
+292.39,projectC,931a06d6-76b5-4e6d-a115-f424e2cc6fd2,stripe,USD,ninja corp,VAT,11/1/2025,GM
+747.49,projectB,2a4fb285-35f6-42fd-ad83-3113633ebb50,Nuvei,USD,metasa-m,DISCOUNT_FEE,11/3/2025,ES
+720.82,projectB,d41de26b-44ba-469d-a929-6c6affc299ab,stripe,USD,ninja corp,VAT,11/1/2025,ME
+667.9,projectA,b29afd7f-35af-49ad-9fe2-8b249c06d15a,Nuvei,GBP,proto-m,CAPTURE_FEE,11/3/2025,JE
+391.07,projectC,8f3097eb-41b2-4773-a5fb-bca19d209983,Nuvei,USD,ninja corp,CHARGEBACK,11/2/2025,NP
